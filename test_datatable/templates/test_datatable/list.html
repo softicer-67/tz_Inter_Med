@@ -1,0 +1,60 @@
+{% load static %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+
+<br>
+    <table class="table">
+            <form method="GET" action="{% url 'data_list' %}">
+                <input type="text" id="search_fio" name="search_fio" placeholder="Поиск фио...">
+                <button type="submit">Найти</button>
+            </form>&nbsp;
+
+            <form method="GET" action="{% url 'data_list' %}">
+                <input type="text" name="search_birth" placeholder="Поиск birth...">
+                <button type="submit">Найти</button>
+            </form>&nbsp;
+
+            <form method="GET" action="{% url 'data_list' %}">
+                <input type="text" name="search_uid" placeholder="Поиск uid...">
+                <button type="submit">Найти</button>
+            </form>&nbsp;
+
+            <form method="GET" action="{% url 'data_list' %}">
+                <input type="text" name="search_date" placeholder="Поиск date...">
+                <button type="submit">Найти</button>
+            </form>&nbsp;
+
+            <form method="GET" action="{% url 'data_list' %}">
+                <input type="text" name="search_mod" placeholder="Поиск mod...">
+                <button type="submit">Найти</button>
+            </form>&nbsp;
+          <thead>
+            <tr>
+              <th scope="col"><a href="?sort=patient_fio">ФИО</a></th>
+              <th scope="col"><a href="?sort=patient_birthdate">Дата рождения</a></th>
+              <th scope="col"><a href="?sort=study_uid">uid</a></th>
+              <th scope="col"><a href="?sort=study_date">date</a></th>
+              <th scope="col"><a href="?sort=study_modality">modality</a></th>
+            </tr>
+
+          </thead>
+          <tbody>
+            {% for list in data_list %}
+            <tr>
+                <td>{{ list.patient_fio }}</td>
+                <td>{{ list.patient_birthdate }}</td>
+                <td>{{ list.study_uid }}</td>
+                <td>{{ list.study_date }}</td>
+                <td>{{ list.study_modality }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+
+    <div>
+        <p class="paginator">
+            {% include "./pagination.html" with page=page_obj %}
+        </p>
+    </div>
+
